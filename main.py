@@ -24,6 +24,8 @@ OUTPUT_DIR = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
 MAX_ROWS = 8
 MIN_HOURS = 1.0
 MAX_HOURS = 72.0
+# Half of each place stays unnamed, shared by the chart games not named there.
+UNNAMED = 0.5
 
 
 def parse_time(value):
@@ -122,7 +124,7 @@ def forecast(snaps, places):
         # chart misses the ones published between two reads, and a later chart
         # is largely those. The mass kept back is shared at scoring time by
         # every chart game this forecast did not name.
-        reserve = 0.5
+        reserve = UNNAMED
         mass = 1.0 - reserve
         if total <= 0 or mass <= 0:
             continue
